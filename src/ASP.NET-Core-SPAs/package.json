@@ -16,7 +16,8 @@
     "gulp-concat": "2.5.2",
     "gulp-cssmin": "0.1.7",
     "gulp-uglify": "1.2.0",
-    "rimraf": "2.2.8"
+    "rimraf": "2.2.8",
+    "jspm": "0.16.15"
   },
   "jspm": {
     "directories": {

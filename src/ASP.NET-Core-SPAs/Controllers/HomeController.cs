@@ -13,6 +13,11 @@ namespace ASP.NET_Core_SPAs.Controllers
             return View();
         }
 
+        public IActionResult Angular2()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();

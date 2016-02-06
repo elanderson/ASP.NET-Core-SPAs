@@ -43,3 +43,24 @@ gulp.task("min:css", function () {
 });
 
 gulp.task("min", ["min:js", "min:css"]);
+
+gulp.task("angular2:moveLibs", function () {
+    return gulp.src([
+            "node_modules/angular2/bundles/angular2-polyfills.js",
+            "node_modules/systemjs/dist/system.src.js",
+            "node_modules/systemjs/dist/system-polyfills.js",
+            "node_modules/rxjs/bundles/Rx.js",
+            "node_modules/angular2/bundles/angular2.dev.js",
+            "node_modules/angular2/bundles/http.dev.js"
+    ])
+        .pipe(gulp.dest(paths.webroot + "Angular"));
+
+});
+
+gulp.task("angular2:moveJs", function () {
+    return gulp.src(["Angular/**/*.js"])
+        .pipe(gulp.dest(paths.webroot + "Angular/app/"));
+
+});
+
+gulp.task("angular2", ["angular2:moveLibs", "angular2:moveJs"])

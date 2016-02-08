@@ -1,6 +1,7 @@
 System.config({
   defaultJSExtensions: true,
   transpiler: "babel",
+  baseURL: "../",
   babelOptions: {
     "optional": [
       "es7.decorators",
@@ -8,9 +9,9 @@ System.config({
     ]
   },
   paths: {
-    "*" : "../Aurelia/*",
-    "github:*": "../jspm_packages/github/*",
-    "npm:*": "../jspm_packages/npm/*"
+    "*":"/Aurelia/*",
+    "github:*": "jspm_packages/github/*",
+    "npm:*": "jspm_packages/npm/*"
   },
 
   map: {

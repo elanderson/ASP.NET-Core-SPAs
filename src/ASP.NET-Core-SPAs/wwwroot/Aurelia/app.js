@@ -1,13 +1,17 @@
-﻿export class Welcome {
-    heading = 'Welcome to Aurelia!';
-    firstName = 'John';
-    lastName = 'Doe';
+﻿import {inject} from 'aurelia-framework';
+import {ContactService} from 'contactService';
 
-    get fullName() {
-        return `${this.firstName} ${this.lastName}`;
+export class ContactList {
+    static inject = [ContactService];
+    heading = 'Contact List';
+
+    constructor (cs) {
+        this.ContactService = cs;
     }
 
-    submit() {
-        alert(`Welcome, ${this.fullName}!`);
+    created() {
+        this.ContactService.GetAll()
+            .then(contacts => this.contacts = contacts);
     }
+    
 }

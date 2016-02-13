@@ -19,54 +19,6 @@ import 'rxjs/Rx';
         </ul>
         <contact-detail [contact]="selectedContact"></contact-detail>
         `,
-    styles: [`
-      .selected {
-        background-color: #CFD8DC !important;
-        color: white;
-      }
-      .contacts {
-        margin: 0 0 2em 0;
-        list-style-type: none;
-        padding: 0;
-        width: 10em;
-      }
-      .contacts li {
-        cursor: pointer;
-        position: relative;
-        left: 0;
-        background-color: #EEE;
-        margin: .5em;
-        padding: .3em 0em;
-        height: 1.6em;
-        border-radius: 4px;
-      }
-      .contacts li.selected:hover {
-        color: white;
-      }
-      .contacts li:hover {
-        color: #607D8B;
-        background-color: #EEE;
-        left: .1em;
-      }
-      .contacts .text {
-        position: relative;
-        top: -3px;
-      }
-      .contacts .badge {
-        display: inline-block;
-        font-size: small;
-        color: white;
-        padding: 0.8em 0.7em 0em 0.7em;
-        background-color: #607D8B;
-        line-height: 1em;
-        position: relative;
-        left: -1px;
-        top: -4px;
-        height: 1.8em;
-        margin-right: .8em;
-        border-radius: 4px 0px 0px 4px;
-      }
-    `],
     directives: [ContactDetailComponent],
     providers: [
         HTTP_PROVIDERS,

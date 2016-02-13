@@ -13,11 +13,11 @@ import {Contact} from './contact';
             </div>
             <div>
                 <label>Email: </label>
-                <div><input [(ngModel)]="contact.Email" placeholder="email"></div>
+                <div><input [(ngModel)]="contact.EmailAddress" placeholder="email"></div>
             </div>
             <div>
                 <label>Phone: </label>
-                <div><input [(ngModel)]="contact.Phone" placeholder="phone"></div>
+                <div><input [(ngModel)]="contact.PhoneNumber" placeholder="phone"></div>
             </div>
         </div>
         `,

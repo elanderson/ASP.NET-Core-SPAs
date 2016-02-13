@@ -1,10 +1,13 @@
 ﻿<template>
+    <require from='./contact-detail'></require>
     <h1>${heading}</h1>
     <div>
-        <ul class="list-unstyled">
-            <li repeat.for="contact of contacts">
+        <ul class="contacts">
+            <li repeat.for="contact of contacts" click.delegate="$parent.select(contact)"
+                class="${contact === $parent.selectedContact ? 'selected' : ''}">
                 <span class="badge">${contact.Id}</span> ${contact.Name}
             </li>
         </ul>
     </div>
+    <contact-detail contact.bind="selectedContact"></contact-detail>
 </template>

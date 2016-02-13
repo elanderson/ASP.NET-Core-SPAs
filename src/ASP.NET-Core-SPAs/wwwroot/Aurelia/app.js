@@ -4,6 +4,7 @@ import {ContactService} from 'contactService';
 export class ContactList {
     static inject = [ContactService];
     heading = 'Contact List';
+    selectedContact = null;
 
     constructor (cs) {
         this.ContactService = cs;
@@ -12,6 +13,10 @@ export class ContactList {
     created() {
         this.ContactService.GetAll()
             .then(contacts => this.contacts = contacts);
+    }
+
+    select(contact) {
+        this.selectedContact = contact;
     }
     
 }

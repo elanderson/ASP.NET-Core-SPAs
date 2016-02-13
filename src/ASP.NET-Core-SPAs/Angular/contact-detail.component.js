@@ -22,7 +22,7 @@ System.register(['angular2/core'], function(exports_1) {
                 ContactDetailComponent = __decorate([
                     core_1.Component({
                         selector: 'contact-detail',
-                        template: "\n        <div *ngIf=\"contact\">\n            <h2>{{contact.Name}}</h2>\n            <div><label>ID: </label>{{contact.Id}}</div>\n            <div>\n                <label>Name: </label>\n                <div><input [(ngModel)]=\"contact.Name\" placeholder=\"name\"></div>\n            </div>\n            <div>\n                <label>Email: </label>\n                <div><input [(ngModel)]=\"contact.Email\" placeholder=\"email\"></div>\n            </div>\n            <div>\n                <label>Phone: </label>\n                <div><input [(ngModel)]=\"contact.Phone\" placeholder=\"phone\"></div>\n            </div>\n        </div>\n        ",
+                        template: "\n        <div *ngIf=\"contact\">\n            <h2>{{contact.Name}}</h2>\n            <div><label>ID: </label>{{contact.Id}}</div>\n            <div>\n                <label>Name: </label>\n                <div><input [(ngModel)]=\"contact.Name\" placeholder=\"name\"></div>\n            </div>\n            <div>\n                <label>Email: </label>\n                <div><input [(ngModel)]=\"contact.EmailAddress\" placeholder=\"email\"></div>\n            </div>\n            <div>\n                <label>Phone: </label>\n                <div><input [(ngModel)]=\"contact.PhoneNumber\" placeholder=\"phone\"></div>\n            </div>\n        </div>\n        ",
                         inputs: ['contact']
                     }), 
                     __metadata('design:paramtypes', [])

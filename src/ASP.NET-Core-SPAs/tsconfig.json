@@ -11,6 +11,9 @@
     "target": "es5"
   },
   "exclude": [
-    "node_modules", "wwwroot"
+    "node_modules",
+    "wwwroot",
+    "typings/main",
+    "typings/main.d.ts"
   ]
 }

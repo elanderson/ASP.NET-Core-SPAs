@@ -2,13 +2,13 @@
   "name": "ASP.NET",
   "version": "0.0.0",
   "dependencies": {
-    "angular2": "2.0.0-beta.11",
-    "systemjs": "0.19.24",
+    "angular2": "2.0.0-beta.15",
+    "systemjs": "0.19.26",
     "es6-promise": "^3.1.2",
     "es6-shim": "^0.35.0",
     "reflect-metadata": "0.1.3",
-    "rxjs": "5.0.0-beta.2",
-    "zone.js": "0.6.4"
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "0.6.11"
   },
   "devDependencies": {
     "es6-module-loader": "^0.17.8",

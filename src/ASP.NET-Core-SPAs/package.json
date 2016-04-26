@@ -2,7 +2,7 @@
   "name": "ASP.NET",
   "version": "0.0.0",
   "dependencies": {
-    "angular2": "2.0.0-beta.15",
+    "angular2": "2.0.0-beta.16",
     "systemjs": "0.19.26",
     "es6-promise": "^3.1.2",
     "es6-shim": "^0.35.0",

@@ -2,23 +2,15 @@
 <head>
     <title>Angular 2 QuickStart</title>
 
-    <script src="~/Angular/angular2-polyfills.js"></script>
-    <script src="~/Angular/system.src.js"></script>
-    <script src="~/Angular/Rx.js"></script>
-    <script src="~/Angular/angular2.dev.js"></script>
-    <script src="~/Angular/http.dev.js"></script>
+    <script src="~/Angular/lib/es6-shim/es6-shim.min.js"></script>
 
+    <script src="~/Angular/lib/zone.js/dist/zone.js"></script>
+    <script src="~/Angular/lib/reflect-metadata/Reflect.js"></script>
+    <script src="~/Angular/lib/systemjs/dist/system.src.js"></script>
+
+    <script src="~/Angular/app/systemjs.config.js"></script>
     <script>
-        System.config({
-            packages: {
-                '../Angular': {
-                    format: 'register',
-                    defaultExtension: 'js'
-                }
-            }
-        });
-        System.import('../Angular/app/boot')
-              .then(null, console.error.bind(console));
+        System.import('app').catch(function(err){ console.error(err); });
     </script>
 
 </head>

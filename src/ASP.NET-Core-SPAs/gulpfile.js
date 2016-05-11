@@ -1,4 +1,4 @@
-﻿/// <binding Clean='clean' />
+﻿/// <binding AfterBuild='angular2:moveJs' Clean='clean' />
 "use strict";
 
 var gulp = require("gulp"),
@@ -46,14 +46,24 @@ gulp.task("min", ["min:js", "min:css"]);
 
 gulp.task("angular2:moveLibs", function () {
     return gulp.src([
-            "node_modules/angular2/bundles/angular2-polyfills.js",
+            "node_modules/@angular/common/**/*",
+            "node_modules/@angular/compiler/**/*",
+            "node_modules/@angular/core/**/*",
+            "node_modules/@angular/http/**/*",
+            "node_modules/@angular/platform-browser/**/*",
+            "node_modules/@angular/platform-browser-dynamic/**/*",
+            "node_modules/@angular/router/**/*",
+            "node_modules/@angular/router-deprecated/**/*",
+            "node_modules/@angular/upgrade/**/*",
             "node_modules/systemjs/dist/system.src.js",
             "node_modules/systemjs/dist/system-polyfills.js",
-            "node_modules/rxjs/bundles/Rx.js",
-            "node_modules/angular2/bundles/angular2.dev.js",
-            "node_modules/angular2/bundles/http.dev.js"
-    ])
-        .pipe(gulp.dest(paths.webroot + "Angular"));
+            "node_modules/rxjs/**/*",
+            "node_modules/es6-shim/es6-shim.min.js",
+            "node_modules/zone.js/dist/zone.js",
+            "node_modules/reflect-metadata/Reflect.js"
+    ],
+        { base: "node_modules" })
+        .pipe(gulp.dest(paths.webroot + "Angular/lib"));
 
 });
 

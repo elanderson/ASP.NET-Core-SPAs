@@ -50,7 +50,7 @@ System.register(['@angular/core', '@angular/http', './contact-detail.component',
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <h1>{{title}}</h1>\n        <ul class=\"contacts\">\n            <li *ngFor=\"#contact of contacts\" \n              [class.selected]=\"contact === selectedContact\"\n              (click)=\"onSelect(contact)\">\n                <span class=\"badge\">{{contact.Id}}</span> {{contact.Name}}\n            </li>\n        </ul>\n        <contact-detail [contact]=\"selectedContact\"></contact-detail>\n        ",
+                        template: "\n        <h1>{{title}}</h1>\n        <ul class=\"contacts\">\n            <li *ngFor=\"let contact of contacts\" \n              [class.selected]=\"contact === selectedContact\"\n              (click)=\"onSelect(contact)\">\n                <span class=\"badge\">{{contact.Id}}</span> {{contact.Name}}\n            </li>\n        </ul>\n        <contact-detail [contact]=\"selectedContact\"></contact-detail>\n        ",
                         directives: [contact_detail_component_1.ContactDetailComponent],
                         providers: [
                             http_1.HTTP_PROVIDERS,

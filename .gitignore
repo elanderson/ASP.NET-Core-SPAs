@@ -234,3 +234,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# wwwRoot Angualr 2 libs
+wwwroot/Angular/lib/

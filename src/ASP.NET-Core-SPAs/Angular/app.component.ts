@@ -11,7 +11,7 @@ import 'rxjs/Rx';
     template: `
         <h1>{{title}}</h1>
         <ul class="contacts">
-            <li *ngFor="#contact of contacts" 
+            <li *ngFor="let contact of contacts" 
               [class.selected]="contact === selectedContact"
               (click)="onSelect(contact)">
                 <span class="badge">{{contact.Id}}</span> {{contact.Name}}

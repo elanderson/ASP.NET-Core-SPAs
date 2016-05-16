@@ -236,4 +236,4 @@ _Pvt_Extensions
 .fake/
 
 # wwwRoot Angualr 2 libs
-wwwroot/Angular/lib/
+src/ASP.NET-Core-SPAs/wwwroot/Angular/lib/

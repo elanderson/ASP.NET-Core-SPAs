@@ -1,5 +1,6 @@
 ﻿using ASP.NET_Core_SPAs.Models;
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ASP.NET_Core_SPAs.Contexts
 {
@@ -8,7 +9,8 @@ namespace ASP.NET_Core_SPAs.Contexts
         private static bool _created;
         public DbSet<Contact> Contacts { get; set; }
 
-        public ContactsDbContext()
+        public ContactsDbContext(DbContextOptions<ContactsDbContext> options)
+            : base(options)
         {
             if (_created) return;
             Database.Migrate();
@@ -17,6 +19,11 @@ namespace ASP.NET_Core_SPAs.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            foreach (var entity in builder.Model.GetEntityTypes())
+            {
+                entity.Relational().TableName = entity.DisplayName();
+            }
+
             builder.Entity<Contact>().HasKey(c => c.Id);
         }
     }

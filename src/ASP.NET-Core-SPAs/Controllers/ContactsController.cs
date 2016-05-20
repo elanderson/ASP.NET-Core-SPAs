@@ -1,11 +1,11 @@
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
 using ASP.NET_Core_SPAs.Contexts;
 using ASP.NET_Core_SPAs.Models;
-using Microsoft.AspNet.Authorization;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASP.NET_Core_SPAs.Controllers
 {
@@ -13,9 +13,12 @@ namespace ASP.NET_Core_SPAs.Controllers
     public class ContactsController : Controller
     {
         private readonly ContactsDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ContactsController(ContactsDbContext context)
+        public ContactsController(UserManager<ApplicationUser> userManager, 
+                                  ContactsDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -30,13 +33,13 @@ namespace ASP.NET_Core_SPAs.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             var contact = await GetContacts().SingleAsync(m => m.Id == id);
             if (contact == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return View(contact);
@@ -55,7 +58,7 @@ namespace ASP.NET_Core_SPAs.Controllers
         {
             if (ModelState.IsValid)
             {
-                contact.UserId = User.GetUserId();
+                contact.UserId = _userManager.GetUserId(User);
                 _context.Contacts.Add(contact);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -68,13 +71,13 @@ namespace ASP.NET_Core_SPAs.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             var contact = await GetContacts().SingleAsync(m => m.Id == id);
             if (contact == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
             return View(contact);
         }
@@ -99,13 +102,13 @@ namespace ASP.NET_Core_SPAs.Controllers
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             var contact = await GetContacts().SingleAsync(m => m.Id == id);
             if (contact == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return View(contact);
@@ -124,7 +127,7 @@ namespace ASP.NET_Core_SPAs.Controllers
 
         private IQueryable<Contact> GetContacts()
         {
-            return _context.Contacts.Where(c => c.UserId == User.GetUserId());
+            return _context.Contacts.Where(c => c.UserId == _userManager.GetUserId(User));
         }
     }
 }

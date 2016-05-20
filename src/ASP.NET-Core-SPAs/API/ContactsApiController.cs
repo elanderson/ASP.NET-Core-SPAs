@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ASP.NET_Core_SPAs.Contexts;
 using ASP.NET_Core_SPAs.Models;
-using Microsoft.AspNet.Authorization;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace ASP.NET_Core_SPAs.API
 {
@@ -17,9 +17,12 @@ namespace ASP.NET_Core_SPAs.API
     public class ContactsApiController : Controller
     {
         private readonly ContactsDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ContactsApiController(ContactsDbContext context)
+        public ContactsApiController(UserManager<ApplicationUser> userManager, 
+                                     ContactsDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -36,14 +39,14 @@ namespace ASP.NET_Core_SPAs.API
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             var contact = await GetContacts().SingleAsync(m => m.Id == id);
 
             if (contact == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             return Ok(contact);
@@ -55,13 +58,13 @@ namespace ASP.NET_Core_SPAs.API
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             if (id != contact.Id ||
-                User.GetUserId() != contact.UserId)
+                _userManager.GetUserId(User) != contact.UserId)
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             _context.Entry(contact).State = EntityState.Modified;
@@ -74,13 +77,13 @@ namespace ASP.NET_Core_SPAs.API
             {
                 if (!ContactExists(id))
                 {
-                    return HttpNotFound();
+                    return NotFound();
                 }
 
                 throw;
             }
 
-            return new HttpStatusCodeResult(StatusCodes.Status204NoContent);
+            return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
         // POST: api/ContactsApi
@@ -89,10 +92,10 @@ namespace ASP.NET_Core_SPAs.API
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
-            contact.UserId = User.GetUserId();
+            contact.UserId = _userManager.GetUserId(User);
             _context.Contacts.Add(contact);
             try
             {
@@ -102,7 +105,7 @@ namespace ASP.NET_Core_SPAs.API
             {
                 if (ContactExists(contact.Id))
                 {
-                    return new HttpStatusCodeResult(StatusCodes.Status409Conflict);
+                    return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
 
                 throw;
@@ -117,13 +120,13 @@ namespace ASP.NET_Core_SPAs.API
         {
             if (!ModelState.IsValid)
             {
-                return HttpBadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             var contact = await GetContacts().SingleAsync(m => m.Id == id);
             if (contact == null)
             {
-                return HttpNotFound();
+                return NotFound();
             }
 
             _context.Contacts.Remove(contact);
@@ -148,7 +151,7 @@ namespace ASP.NET_Core_SPAs.API
 
         private IQueryable<Contact> GetContacts()
         {
-            return _context.Contacts.Where(c => c.UserId == User.GetUserId());
+            return _context.Contacts.Where(c => c.UserId == _userManager.GetUserId(User));
         }
     }
 }

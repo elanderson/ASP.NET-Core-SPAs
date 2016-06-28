@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using ASP.NET_Core_SPAs.Contexts;
 using ASP.NET_Core_SPAs.Models;
 using ASP.NET_Core_SPAs.Services;
+using Newtonsoft.Json.Serialization;
 
 namespace ASP.NET_Core_SPAs
 {
@@ -45,8 +46,9 @@ namespace ASP.NET_Core_SPAs
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
-
+            services.AddMvc()
+                    .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();

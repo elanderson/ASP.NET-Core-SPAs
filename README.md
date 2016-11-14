@@ -1,3 +1,6 @@
+## This repo has been replaced
+The [ASP.NET-Core-Basics](https://github.com/elanderson/ASP.NET-Core-Basics) repo now contains basically everything this repo was trying to do, but layed out it a more clear way. Please use it for future reference.
+
 ## Getting started with ASP.NET-Core-SPAs
 [This](http://www.elanderson.net/2016/02/asp-net-core-project-with-angular-2-aurelia-and-an-api/) blog post is a guide to get the code up and running.
 
